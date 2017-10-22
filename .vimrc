@@ -60,7 +60,6 @@ Plugin 'suan/vim-instant-markdown'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'posva/vim-vue'
-Plugin 'leafgarland/typescript-vim'
 
 " ========== 华丽分割线 ================
 call vundle#end() " 必须
