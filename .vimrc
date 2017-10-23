@@ -48,6 +48,8 @@ Plugin 'gmarik/Vundle.vim'
 " 我的插件
 " ======================================
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
 
 " markdown
 Plugin 'godlygeek/tabular'
@@ -65,3 +67,24 @@ Plugin 'posva/vim-vue'
 " ========== 华丽分割线 ================
 call vundle#end() " 必须
 filetype plugin indent on " 必须
+
+" NERD tree
+" Open a NERDTree
+nmap <F5> :NERDTreeToggle<cr>
+let NERDChristmasTree=0
+let NERDTreeWinSize=30
+let NERDTreeChDirMode=2
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
+let NERDTreeShowBookmarks=1
+" 窗口位置
+let NERDTreeWinPos="left"
+" 显示隐藏文件
+let NERDTreeShowHidden=1
+" 共享tab
+let g:nerdtree_tabs_open_on_console_startup=1
+
+" Automatically open a NERDTree if no files where specified
+autocmd vimenter * if !argc() | NERDTree | endif
+" Close vim if the only window left open is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
