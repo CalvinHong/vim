@@ -48,7 +48,6 @@ Plugin 'gmarik/Vundle.vim'
 " 我的插件
 " ======================================
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'tstyled-componentserryma/vim-multiple-cursors'
 
 " markdown
 Plugin 'godlygeek/tabular'
@@ -57,10 +56,12 @@ Plugin 'suan/vim-instant-markdown'
 
 
 " web dev
+Plugin 'mattn/emmet-vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'posva/vim-vue'
 
+" Plugin 'tstyled-componentserryma/vim-multiple-cursors'
 " ========== 华丽分割线 ================
 call vundle#end() " 必须
 filetype plugin indent on " 必须
