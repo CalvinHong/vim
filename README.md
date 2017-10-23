@@ -2,7 +2,10 @@
 vim配置备份
 
 ### YouCompeleteMe
-
+需要安装CMake
+```
+brew install CMake
+```
 自动补全
 > C# support: install Mono and add --omnisharp-completer  
 > Go support: install Go and add --gocode-completer  
