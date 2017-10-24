@@ -20,3 +20,8 @@ brew install CMake
 npm -g install instant-markdown-d
 ```
 
+### airline
+```
+mkdir ~/.fonts
+git clone git@github.com:Lokaltog/powerline-fonts.git
+```

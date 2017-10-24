@@ -54,6 +54,9 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+" 快速注释
+Plugin 'scrooloose/nerdcommenter'
+
 " 粘贴板
 Plugin 'kien/ctrlp.vim'
 " 状态栏
@@ -81,13 +84,20 @@ call vundle#end() " 必须
 filetype plugin indent on " 必须
 " ========== 华丽分割线 ================
 
+" ========== 快捷键 ====================
+
+" 设置leader键
+let mapleader = ","
+" 折叠/展开nerdtree
+nmap <F5> :NERDTreeToggle<cr>
+" 格式化快捷键
+noremap <F3> :Autoformat<CR>:w<CR>
+
 " ========== pluginConfig 插件相关的配置 ============
 
 " ========================
 " NERD tree
 " ========================
-" 折叠/展开快捷键
-nmap <F5> :NERDTreeToggle<cr>
 let NERDChristmasTree=0
 let NERDTreeWinSize=30
 let NERDTreeChDirMode=2
@@ -126,8 +136,6 @@ let g:syntastic_javascript_checkers=['eslint']
 " 格式化配置
 let g:formatdef_eslint = '"SRC=eslint-temp-${RANDOM}.js; cat - >$SRC; eslint --fix $SRC >/dev/null 2>&1; cat $SRC | perl -pe \"chomp if eof\"; rm -f $SRC"'
 let g:formatters_javascript = ['eslint']
-" 格式化快捷键
-noremap <F3> :Autoformat<CR>:w<CR>
 
 "=========================
 " ctrlp 文件检索配置
@@ -137,4 +145,4 @@ let g:ctrlp_max_height=15
 "=========================
 " airline设置 
 "=========================
-set laststatus=2
+" set laststatus=2
