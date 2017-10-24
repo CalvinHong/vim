@@ -24,4 +24,5 @@ npm -g install instant-markdown-d
 ```
 mkdir ~/.fonts
 git clone git@github.com:Lokaltog/powerline-fonts.git
+fc-cache -vf ~/.fonts
 ```
