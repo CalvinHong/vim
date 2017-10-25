@@ -56,13 +56,12 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 " 快速注释
 Plugin 'scrooloose/nerdcommenter'
-
 " 粘贴板
 Plugin 'kien/ctrlp.vim'
 " 状态栏
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-
+Plugin 'tpope/vim-fugitive'
 " 多光标操作
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'godlygeek/tabular'
@@ -92,6 +91,11 @@ let mapleader = ","
 nmap <F5> :NERDTreeToggle<cr>
 " 格式化快捷键
 noremap <F3> :Autoformat<CR>:w<CR>
+" 映射切换buffer的键位
+nnoremap <leader>bp :bp<CR>
+nnoremap <leader>bn :bn<CR>
+nnoremap <leader>bd :bd<CR>
+nnoremap <leader>bl :bl<CR>
 
 " ========== pluginConfig 插件相关的配置 ============
 
@@ -101,7 +105,7 @@ noremap <F3> :Autoformat<CR>:w<CR>
 let NERDChristmasTree=0
 let NERDTreeWinSize=30
 let NERDTreeChDirMode=2
-let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$', '\.git', '\.svn']
 " 显示书签列表
 let NERDTreeShowBookmarks=1
 " 窗口位置
@@ -141,6 +145,7 @@ let g:formatters_javascript = ['eslint']
 " ctrlp 文件检索配置
 "=========================
 let g:ctrlp_max_height=15
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|pyc)$'
 
 "=========================
 " airline设置 
@@ -150,12 +155,11 @@ set laststatus=2
 let g:airline_powerline_fonts = 1
 " 开启tabline
 let g:airline#extensions#tabline#enabled = 1
-" tabline中当前buffer两端的分隔字符
-let g:airline#extensions#tabline#left_sep = ' '
-" tabline中未激活buffer两端的分隔字符
-let g:airline#extensions#tabline#left_alt_sep = '|'
-" tabline中buffer显示编号
-let g:airline#extensions#tabline#buffer_nr_show = 1
-" 映射切换buffer的键位
-nnoremap [b :bp<CR>
-nnoremap ]b :bn<CR>
+let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#tabline#buffer_nr_show = 0
+let g:airline#extensions#tabline#fnametruncate = 16
+let g:airline#extensions#tabline#fnamecollapse = 2
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#hunks#enabled = 1

@@ -1,5 +1,12 @@
-# vim
-vim配置备份
+# vim vim配置备份
+
+================================
+迁移至vim-plug
+1. 安装vim-plug
+```
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+```
 
 ### YouCompeleteMe
 需要安装CMake
@@ -25,4 +32,9 @@ npm -g install instant-markdown-d
 mkdir ~/.fonts
 git clone git@github.com:Lokaltog/powerline-fonts.git
 fc-cache -vf ~/.fonts
+```
+
+### ack
+```
+brew install ack
 ```
