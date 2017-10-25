@@ -79,7 +79,13 @@ Plug 'tpope/vim-fugitive'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-Plug 'suan/vim-instant-markdown'
+
+function! BuildInstantMarkdown(info)
+  if a:info.status == 'installed' || a:info.force
+    !npm install -g instant-markdown-d
+  endif
+endfunction
+Plug 'suan/vim-instant-markdown', {'do': function('BuildInstantMarkdown')}
 
 " 语法检查
 "Plug 'vim-syntastic/syntastic'
@@ -98,16 +104,21 @@ filetype plugin indent on " 必须
 " ========== 快捷键 ====================
 
 " 设置leader键
-let mapleader = ","
+let mapleader = ";"
 " 折叠/展开nerdtree
 nmap <F5> :NERDTreeToggle<cr>
 " 格式化快捷键
 noremap <F3> :Autoformat<CR>:w<CR>
 " 映射切换buffer的键位
-nnoremap <leader>bp :bp<CR>
+" 上一个buffer
+nnoremap <leader>bp :bp<CR> 
+" 下一个buffer
 nnoremap <leader>bn :bn<CR>
+" 关闭当前buffer
 nnoremap <leader>bd :bd<CR>
-nnoremap <leader>bl :bl<CR>
+"nnoremap <leader>bl :bl<CR>
+" 之前打开的buffer
+nnoremap <leader>bb :b#<CR>
 
 " ========== pluginConfig 插件相关的配置 ============
 
