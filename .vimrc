@@ -43,43 +43,55 @@ colorscheme monokai
 set hlsearch
 
 "======================================
-" myPlugin我的插件
+" myPlug我的插件
 "=======================================
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" 使用Vundle管理插件，必须
-Plugin 'gmarik/Vundle.vim'
+call plug#begin('~/.vim/plugged')
+" 使用vim-plug管理包
+Plug 'gmarik/Vundle.vim'
+" YCC
+function! BuildYCM(info)
+  if a:info.status == 'installed' || a:info.force
+    !./install.sh
+  endif
+endfunction
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+" javascript补全 
+function! BuildTern(info)
+  if a:info.status == 'installed' || a:info.force
+    !npm install
+  endif
+endfunction
+Plug 'marijnh/tern_for_vim', { 'do': function('BuildTern') }
+
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 " 快速注释
-Plugin 'scrooloose/nerdcommenter'
-" 粘贴板
-Plugin 'kien/ctrlp.vim'
+Plug 'scrooloose/nerdcommenter'
+" 文件搜索
+Plug 'kien/ctrlp.vim'
 " 状态栏
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
 " 多光标操作
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'suan/vim-instant-markdown'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'suan/vim-instant-markdown'
 
 " 语法检查
-Plugin 'vim-syntastic/syntastic'
+"Plug 'vim-syntastic/syntastic'
 " 自动格式化
-Plugin 'Chiel92/vim-autoformat'
+"Plug 'Chiel92/vim-autoformat'
 
 " web dev
-Plugin 'mattn/emmet-vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'posva/vim-vue'
-
-call vundle#end() " 必须
+Plug 'mattn/emmet-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'posva/vim-vue'
+call plug#end()
 filetype plugin indent on " 必须
 " ========== 华丽分割线 ================
 
@@ -105,7 +117,7 @@ nnoremap <leader>bl :bl<CR>
 let NERDChristmasTree=0
 let NERDTreeWinSize=30
 let NERDTreeChDirMode=2
-let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$', '\.git', '\.svn']
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$', '\.svn']
 " 显示书签列表
 let NERDTreeShowBookmarks=1
 " 窗口位置
