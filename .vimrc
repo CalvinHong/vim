@@ -3,7 +3,6 @@
 "=========================
 set nocompatible " 必须
 set backspace=2
-
 " 行号设置
 set number " 开启行号
 set numberwidth=5
@@ -31,13 +30,18 @@ filetype plugin indent on
 " 显示光标
 set ruler
 " 光标高亮
-au WinLeave * set nocursorline nocursorcolumn
-au WinEnter * set cursorline cursorcolumn
+"au WinLeave * set nocursorline nocursorcolumn
+"au WinEnter * set cursorline cursorcolumn
 set cursorline cursorcolumn
+"hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+"hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 " 开启语法检查
 syntax enable
+
 " monokai主题颜色
-colorscheme monokai
+let g:solarized_termcolors=256
+set background=dark
+colorscheme solarized
 
 " 搜索字符高亮提示
 set hlsearch
@@ -56,7 +60,7 @@ function! BuildYCM(info)
 endfunction
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 
-" javascript补全 
+" javascript补全
 function! BuildTern(info)
   if a:info.status == 'installed' || a:info.force
     !npm install
@@ -67,6 +71,9 @@ Plug 'marijnh/tern_for_vim', { 'do': function('BuildTern') }
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+"行号旁边git差异显示
+Plug 'mhinz/vim-signify'
+
 " 快速注释
 Plug 'scrooloose/nerdcommenter'
 " 文件搜索
@@ -126,13 +133,13 @@ nnoremap <leader>bb :b#<CR>
 " NERD tree
 " ========================
 let NERDChristmasTree=0
-let NERDTreeWinSize=30
+let NERDTreeWinSize=25
 let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$', '\.svn']
 " 显示书签列表
 let NERDTreeShowBookmarks=1
 " 窗口位置
-let NERDTreeWinPos="left"
+let NERDTreeWinPos="right"
 " 显示隐藏文件
 let NERDTreeShowHidden=1
 " 共享tab
@@ -178,7 +185,8 @@ set laststatus=2
 let g:airline_powerline_fonts = 1
 " 开启tabline
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+let g:airline#extensions#tabline#tab_nr_type = 1
+" tab number
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#buffer_nr_show = 0
