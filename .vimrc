@@ -96,6 +96,7 @@ Plug 'suan/vim-instant-markdown', {'do': function('BuildInstantMarkdown')}
 
 " 语法检查
 "Plug 'vim-syntastic/syntastic'
+Plug 'w0rp/ale'
 " 自动格式化
 "Plug 'Chiel92/vim-autoformat'
 
@@ -114,6 +115,7 @@ filetype plugin indent on " 必须
 let mapleader = ";"
 " 折叠/展开nerdtree
 nmap <F5> :NERDTreeToggle<cr>
+nmap <F8> <Plug>(ale_fix)
 " 格式化快捷键
 noremap <F3> :Autoformat<CR>:w<CR>
 " 映射切换buffer的键位
@@ -194,3 +196,18 @@ let g:airline#extensions#tabline#fnametruncate = 16
 let g:airline#extensions#tabline#fnamecollapse = 2
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#hunks#enabled = 1
+"=========================
+" ale 语法检查设置 
+"=========================
+let g:ale_sign_column_always = 1
+let g:airline#extensions#ale#enabled = 1
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+"=========================
+" jsx 配置 
+"=========================
+let g:jsx_ext_required = 0
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\}
+let g:ale_linters = {'css': ['stylelint']}
