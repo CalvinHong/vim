@@ -69,19 +69,26 @@ endfunction
 Plug 'marijnh/tern_for_vim', { 'do': function('BuildTern') }
 
 Plug 'scrooloose/nerdtree'
+"目录树tab共享
 Plug 'jistr/vim-nerdtree-tabs'
+"目录树git差异标示
 Plug 'Xuyuanp/nerdtree-git-plugin'
+"git差异提示
+Plug 'tpope/vim-fugitive'
 "行号旁边git差异显示
 Plug 'mhinz/vim-signify'
 
 " 快速注释
 Plug 'scrooloose/nerdcommenter'
 " 文件搜索
-Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+"快速移动
+Plug 'easymotion/vim-easymotion'
+Plug 'junegunn/vim-easy-align'
 " 状态栏
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-fugitive'
 " 多光标操作
 Plug 'terryma/vim-multiple-cursors'
 Plug 'godlygeek/tabular'
@@ -99,6 +106,8 @@ Plug 'suan/vim-instant-markdown', {'do': function('BuildInstantMarkdown')}
 Plug 'w0rp/ale'
 " 自动格式化
 "Plug 'Chiel92/vim-autoformat'
+Plug 'docunext/closetag.vim'
+Plug 'terryma/vim-expand-region'
 
 " web dev
 Plug 'mattn/emmet-vim'
@@ -117,7 +126,7 @@ let mapleader = ";"
 nmap <F5> :NERDTreeToggle<cr>
 nmap <F8> <Plug>(ale_fix)
 " 格式化快捷键
-noremap <F3> :Autoformat<CR>:w<CR>
+"noremap <F3> :Autoformat<CR>:w<CR>
 " 映射切换buffer的键位
 " 上一个buffer
 nnoremap <leader>bp :bp<CR> 
@@ -128,7 +137,12 @@ nnoremap <leader>bd :bd<CR>
 "nnoremap <leader>bl :bl<CR>
 " 之前打开的buffer
 nnoremap <leader>bb :b#<CR>
-
+"快速选择（）里面内容快捷键
+map K <Plug>(expand_region_expand)
+map J <Plug>(expand_region_shrink)
+" 快速查找文件
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " ========== pluginConfig 插件相关的配置 ============
 
 " ========================
@@ -176,8 +190,8 @@ let g:formatters_javascript = ['eslint']
 "=========================
 " ctrlp 文件检索配置
 "=========================
-let g:ctrlp_max_height=15
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|pyc)$'
+"let g:ctrlp_max_height=15
+"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|pyc)$'
 
 "=========================
 " airline设置 
@@ -201,8 +215,6 @@ let g:airline#extensions#hunks#enabled = 1
 "=========================
 let g:ale_sign_column_always = 1
 let g:airline#extensions#ale#enabled = 1
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
 "=========================
 " jsx 配置 
 "=========================
