@@ -45,7 +45,7 @@ colorscheme solarized
 
 " 搜索字符高亮提示
 set hlsearch
-
+set ic
 "======================================
 " myPlug我的插件
 "=======================================
@@ -83,6 +83,8 @@ Plug 'scrooloose/nerdcommenter'
 " 文件搜索
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+"全局文件搜索
+Plug 'dyng/ctrlsf.vim'
 "快速移动
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/vim-easy-align'
@@ -93,6 +95,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+" 函数导航
+Plug 'majutsushi/tagbar'
 
 function! BuildInstantMarkdown(info)
   if a:info.status == 'installed' || a:info.force
@@ -100,7 +104,6 @@ function! BuildInstantMarkdown(info)
   endif
 endfunction
 Plug 'suan/vim-instant-markdown', {'do': function('BuildInstantMarkdown')}
-
 " 语法检查
 "Plug 'vim-syntastic/syntastic'
 Plug 'w0rp/ale'
@@ -124,9 +127,16 @@ filetype plugin indent on " 必须
 let mapleader = ";"
 " 折叠/展开nerdtree
 nmap <F5> :NERDTreeToggle<cr>
+nmap <F6> :TagbarToggle<CR>
 nmap <F8> <Plug>(ale_fix)
-" 格式化快捷键
-"noremap <F3> :Autoformat<CR>:w<CR>
+"搜索文件
+nnoremap <Leader>sf :FZF<CR>
+nnoremap <Leader>st :CtrlSFToggle<CR>
+"选择搜索结果
+vmap     <Leader>sw <Plug>CtrlSFVwordPath
+" 选中搜索 - 结果列表
+vmap     <Leader>sl <Plug>CtrlSFQuickfixVwordPath
+
 " 映射切换buffer的键位
 " 上一个buffer
 nnoremap <leader>bp :bp<CR> 
@@ -178,21 +188,6 @@ let g:NERDTreeIndicatorMapCustom = {
     \ 'Ignored'   : '☒',
     \ "Unknown"   : "?"
     \ }
-
-" ========================
-" syntastic
-" ========================
-let g:syntastic_javascript_checkers=['eslint']
-" 格式化配置
-let g:formatdef_eslint = '"SRC=eslint-temp-${RANDOM}.js; cat - >$SRC; eslint --fix $SRC >/dev/null 2>&1; cat $SRC | perl -pe \"chomp if eof\"; rm -f $SRC"'
-let g:formatters_javascript = ['eslint']
-
-"=========================
-" ctrlp 文件检索配置
-"=========================
-"let g:ctrlp_max_height=15
-"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|pyc)$'
-
 "=========================
 " airline设置 
 "=========================
@@ -223,3 +218,14 @@ let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \}
 let g:ale_linters = {'css': ['stylelint']}
+"=========================
+" ctrlsf 配置 
+"=========================
+let g:ctrlsf_ackprg = 'ag'
+"=========================
+" tagbar 配置 
+"=========================
+let g:tagbar_ctags_bin='/usr/local/bin/ctags'
+let g:tagbar_left = 1
+let g:tagbar_width = 25 
+let g:tagbar_autofocus=1
