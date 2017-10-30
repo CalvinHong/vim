@@ -9,7 +9,7 @@ set numberwidth=5
 
 " 文件编码设置
 set fileencodings=utf-8,bg18030,gbk,big5
-
+set splitbelow
 set showcmd
 " softab
 set tabstop=2
@@ -77,7 +77,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-fugitive'
 "行号旁边git差异显示
 Plug 'mhinz/vim-signify'
-
+" 自动闭合
+Plug 'jiangmiao/auto-pairs'
 " 快速注释
 Plug 'scrooloose/nerdcommenter'
 " 文件搜索
@@ -96,7 +97,12 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 " 函数导航
-Plug 'majutsushi/tagbar'
+function! BuildTagbar(info)
+  if a:info.status == 'installed' || a:info.force
+    !npm install -g jsctags
+  endif
+endfunction
+Plug 'majutsushi/tagbar', {'do': function('BuildTagbar')}
 
 function! BuildInstantMarkdown(info)
   if a:info.status == 'installed' || a:info.force
@@ -105,10 +111,8 @@ function! BuildInstantMarkdown(info)
 endfunction
 Plug 'suan/vim-instant-markdown', {'do': function('BuildInstantMarkdown')}
 " 语法检查
-"Plug 'vim-syntastic/syntastic'
 Plug 'w0rp/ale'
 " 自动格式化
-"Plug 'Chiel92/vim-autoformat'
 Plug 'docunext/closetag.vim'
 Plug 'terryma/vim-expand-region'
 
@@ -125,6 +129,11 @@ filetype plugin indent on " 必须
 
 " 设置leader键
 let mapleader = ";"
+"多光标选择
+let g:multi_cursor_quit_key='<C-c>'
+let g:multi_cursor_start_key='<leader>n'
+" 关闭搜索高亮
+map <C-n> :nohl<cr>
 " 折叠/展开nerdtree
 nmap <F5> :NERDTreeToggle<cr>
 nmap <F6> :TagbarToggle<CR>
@@ -147,12 +156,26 @@ nnoremap <leader>bd :bd<CR>
 "nnoremap <leader>bl :bl<CR>
 " 之前打开的buffer
 nnoremap <leader>bb :b#<CR>
+" 跳转到浏览器
+nnoremap <leader>tb :TernDocBrowse<cr>
+" 显示变量定义
+nnoremap <leader>tt :TernType<cr>
+" 跳转到定义处
+nnoremap <leader>tf :TernDef<cr>
+" 显示文档
+nnoremap <leader>td :TernDoc<cr>
+" 预览窗口显示定义处代码
+nnoremap <leader>tp :TernDefPreview<cr>
+" 变量重命名
+nnoremap <leader>tr :TernRename<cr>
+" location 列表显示全部引用行
+nnoremap <leader>tl :TernRefs<cr>
 "快速选择（）里面内容快捷键
 map K <Plug>(expand_region_expand)
 map J <Plug>(expand_region_shrink)
-" 快速查找文件
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+nnoremap <C-c> :call multiple_cursors#quit()<CR>
 " ========== pluginConfig 插件相关的配置 ============
 
 " ========================
@@ -165,7 +188,7 @@ let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$', '\.svn']
 " 显示书签列表
 let NERDTreeShowBookmarks=1
 " 窗口位置
-let NERDTreeWinPos="right"
+let NERDTreeWinPos="left"
 " 显示隐藏文件
 let NERDTreeShowHidden=1
 " 共享tab
@@ -226,6 +249,27 @@ let g:ctrlsf_ackprg = 'ag'
 " tagbar 配置 
 "=========================
 let g:tagbar_ctags_bin='/usr/local/bin/ctags'
-let g:tagbar_left = 1
-let g:tagbar_width = 25 
+"let g:tagbar_left = 1
+let g:tagbar_width = 50 
 let g:tagbar_autofocus=1
+let g:tagbar_type_javascript = {
+\ 'ctagsbin' : 'jsctags'
+\ }
+"=========================
+" muti_cursor 配置 
+"=========================
+let g:multi_cursor_exit_from_visual_mode = 0
+let g:multi_cursor_exit_from_insert_mode = 0
+"=========================
+" YCM 配置 
+"=========================
+let g:ycm_min_num_of_chars_for_completion = 3
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_complete_in_comments = 1
+"=========================
+" tern 配置 
+"=========================
+" 鼠标停留在方法内时显示参数提示
+let g:tern_show_argument_hints = 'on_hold'
+" 补全时显示函数类型定义
+let g:tern_show_signature_in_pum = 1
