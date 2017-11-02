@@ -46,6 +46,7 @@ colorscheme solarized
 " 搜索字符高亮提示
 set hlsearch
 set ic
+set smartcase
 "======================================
 " myPlug我的插件
 "=======================================
@@ -92,6 +93,8 @@ Plug 'junegunn/vim-easy-align'
 " 状态栏
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+"防止buffer delete窗口关闭
+Plug 'moll/vim-bbye'
 " 多光标操作
 Plug 'terryma/vim-multiple-cursors'
 Plug 'godlygeek/tabular'
@@ -152,7 +155,7 @@ nnoremap <leader>bp :bp<CR>
 " 下一个buffer
 nnoremap <leader>bn :bn<CR>
 " 关闭当前buffer
-nnoremap <leader>bd :bd<CR>
+nnoremap <leader>bd :Bdelete<CR>
 "nnoremap <leader>bl :bl<CR>
 " 之前打开的buffer
 nnoremap <leader>bb :b#<CR>
@@ -218,16 +221,18 @@ set laststatus=2
 " 使用powerline打过补丁的字体
 let g:airline_powerline_fonts = 1
 " 开启tabline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#tab_nr_type = 1
 " tab number
-let g:airline#extensions#tabline#show_tab_nr = 1
-let g:airline#extensions#tabline#formatter = 'default'
-let g:airline#extensions#tabline#buffer_nr_show = 0
-let g:airline#extensions#tabline#fnametruncate = 16
-let g:airline#extensions#tabline#fnamecollapse = 2
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#hunks#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+"let g:airline#extensions#bufferline#enabled = 1
+"let g:airline#extensions#tabline#switch_buffers_and_tabs=1
+"let g:airline#extensions#tabline#show_tab_nr = 1
+"let g:airline#extensions#tabline#formatter = 'default'
+"let g:airline#extensions#tabline#buffer_nr_show = 0
+"let g:airline#extensions#tabline#fnametruncate = 16
+"let g:airline#extensions#tabline#fnamecollapse = 2
+"let g:airline#extensions#tabline#buffer_idx_mode = 1
+"let g:airline#extensions#hunks#enabled = 1
 "=========================
 " ale 语法检查设置 
 "=========================
