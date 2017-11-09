@@ -3,6 +3,7 @@
 "=========================
 set nocompatible " 必须
 set backspace=2
+set clipboard=unnamed
 " 行号设置
 set number " 开启行号
 set numberwidth=5
