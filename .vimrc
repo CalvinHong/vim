@@ -161,7 +161,8 @@ nnoremap <leader>bp :bp<CR>
 nnoremap <leader>bn :bn<CR>
 " 关闭当前buffer
 nnoremap <leader>bd :Bdelete<CR>
-"nnoremap <leader>bl :bl<CR>
+" 所有buffer
+nnoremap <leader>bf :buffers<CR>:buffer<Space>
 " 之前打开的buffer
 nnoremap <leader>bb :b#<CR>
 " 跳转到浏览器
