@@ -103,6 +103,8 @@ Plug 'moll/vim-bbye'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+" 中文输入法问题
+Plug 'ybian/smartim'
 " 函数导航
 function! BuildTagbar(info)
   if a:info.status == 'installed' || a:info.force
