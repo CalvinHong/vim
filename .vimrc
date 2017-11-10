@@ -3,7 +3,11 @@
 "=========================
 set nocompatible " 必须
 set backspace=2
+"共享系统剪切板
 set clipboard=unnamed
+set autoread
+"切换文件时自动保存buffer
+set autowriteall
 " 行号设置
 set number " 开启行号
 set numberwidth=5
@@ -23,7 +27,6 @@ set list listchars=tab:»·,trail:·
 
 " 开启文件类型检查
 filetype plugin indent on
-
 
 "=========================
 " themeConfig 主题相关设置 
@@ -144,9 +147,10 @@ nmap <F6> :TagbarToggle<CR>
 nmap <F8> <Plug>(ale_fix)
 "搜索文件
 nnoremap <Leader>sf :FZF<CR>
+nnoremap <Leader>sc :CtrlSF<Space>
 nnoremap <Leader>st :CtrlSFToggle<CR>
 "选择搜索结果
-vmap     <Leader>sw <Plug>CtrlSFVwordPath
+vmap     <Leader>sc <Plug>CtrlSFVwordPath
 " 选中搜索 - 结果列表
 vmap     <Leader>sl <Plug>CtrlSFQuickfixVwordPath
 
@@ -185,6 +189,8 @@ nnoremap <C-c> :call multiple_cursors#quit()<CR>
 " ========================
 " NERD tree
 " ========================
+" 默认隐藏
+"let NERDTreeQuitOnOpen = 1
 let NERDChristmasTree=0
 let NERDTreeWinSize=25
 let NERDTreeChDirMode=2
@@ -196,7 +202,7 @@ let NERDTreeWinPos="left"
 " 显示隐藏文件
 let NERDTreeShowHidden=1
 " 共享tab
-let g:nerdtree_tabs_open_on_console_startup=1
+"let g:nerdtree_tabs_open_on_console_startup=1
 
 " Automatically open a NERDTree if no files where specified
 autocmd vimenter * if !argc() | NERDTree | endif
@@ -251,6 +257,7 @@ let g:ale_linters = {'css': ['stylelint']}
 " ctrlsf 配置 
 "=========================
 let g:ctrlsf_ackprg = 'ag'
+let g:ctrlsf_default_view_mode = 'compact'
 "=========================
 " tagbar 配置 
 "=========================
