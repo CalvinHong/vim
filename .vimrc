@@ -103,8 +103,8 @@ Plug 'moll/vim-bbye'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-" 中文输入法问题
-Plug 'ybian/smartim'
+
+Plug 'CodeFalling/fcitx-vim-osx'
 " 函数导航
 function! BuildTagbar(info)
   if a:info.status == 'installed' || a:info.force
@@ -135,12 +135,12 @@ filetype plugin indent on " 必须
 " ========== 华丽分割线 ================
 
 " ========== 快捷键 ====================
-
 " 设置leader键
 let mapleader = ";"
 "多光标选择
 let g:multi_cursor_quit_key='<C-c>'
 let g:multi_cursor_start_key='<leader>n'
+imap <C-c> <Esc>
 " 关闭搜索高亮
 map <C-n> :nohl<cr>
 " 折叠/展开nerdtree
