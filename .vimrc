@@ -8,7 +8,7 @@ set clipboard=unnamed
 set autoread
 "切换文件时自动保存buffer
 set autowriteall
-set autoindent
+set smartindent
 " 行号设置
 set number " 开启行号
 set numberwidth=5

@@ -1,40 +1,22 @@
 # vim vim配置备份
 
-================================
-迁移至vim-plug
-1. 安装vim-plug
+## 包管理
+vim-plug
 ```
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
+## 主题
+- [ ] monokai
+- [x] solarized
 
-### YouCompeleteMe
-需要安装CMake
-```
-brew install CMake
-```
-自动补全
-> C# support: install Mono and add --omnisharp-completer  
-> Go support: install Go and add --gocode-completer  
-> TypeScript support: install Node.js and npm then install the TypeScript SDK with npm install -g typescript.  
-> JavaScript support: install Node.js and npm and add --tern-completer  
-> Rust support: install Rust and add --racer-completer  
+## 插件列表
+
+### 基础功能
+- [x] airline
+
+### 编辑功能
+- [x] 代码提醒YouCompeleteMe
+- [x] markdown编辑
 
 
-### Markdown
-先安装npm包
-```
-npm -g install instant-markdown-d
-```
-
-### airline
-```
-mkdir ~/.fonts
-git clone git@github.com:Lokaltog/powerline-fonts.git
-fc-cache -vf ~/.fonts
-```
-
-### ack
-```
-brew install ack
-```
