@@ -1,4 +1,4 @@
-# vim vim配置备份
+# vim配置备份
 
 ## 包管理
 vim-plug
