@@ -56,8 +56,6 @@ set smartcase
 " myPlug我的插件
 "=======================================
 call plug#begin('~/.vim/plugged')
-" 使用vim-plug管理包
-Plug 'gmarik/Vundle.vim'
 " YCC
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
