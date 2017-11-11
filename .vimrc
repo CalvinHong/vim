@@ -8,6 +8,7 @@ set clipboard=unnamed
 set autoread
 "切换文件时自动保存buffer
 set autowriteall
+set autoindent
 " 行号设置
 set number " 开启行号
 set numberwidth=5
@@ -103,8 +104,8 @@ Plug 'moll/vim-bbye'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-" 中文输入法问题
-Plug 'ybian/smartim'
+"中文切换问题
+Plug 'CodeFalling/fcitx-vim-osx'
 " 函数导航
 function! BuildTagbar(info)
   if a:info.status == 'installed' || a:info.force
