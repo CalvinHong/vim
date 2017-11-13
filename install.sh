@@ -1,10 +1,14 @@
 #!/bin/sh
-if hash hln 2>/dev/null; then
-  echo "hln should use"
+ln .vimrc ~/.vimrc
+if hash brew 2>/dev/null; then
+  #安装cmake
+  if ! hash make 2> /dev/null; then
+    brew install cmake
+  fi
+  #安装ag
+  if ! hash ag 2> /dev/null; then
+    brew install ag
+  fi
   else
-    brew install hardlink-osx
+   echo 'installed !!' 
 fi
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-hln ./ ~/.vim
-hln .vimrc ~/.vimrc

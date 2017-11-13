@@ -8,6 +8,7 @@ set clipboard=unnamed
 set autoread
 "切换文件时自动保存buffer
 set autowriteall
+set smartindent
 " 行号设置
 set number " 开启行号
 set numberwidth=5
@@ -55,8 +56,6 @@ set smartcase
 " myPlug我的插件
 "=======================================
 call plug#begin('~/.vim/plugged')
-" 使用vim-plug管理包
-Plug 'gmarik/Vundle.vim'
 " YCC
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
@@ -103,8 +102,9 @@ Plug 'moll/vim-bbye'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-
+"中文切换问题
 Plug 'CodeFalling/fcitx-vim-osx'
+
 " 函数导航
 function! BuildTagbar(info)
   if a:info.status == 'installed' || a:info.force
