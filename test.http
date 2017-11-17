@@ -1,0 +1,10 @@
+# $apihost = http://localhost:1234
+
+# userInfo
+
+GET $apihost/activity/exerciseK/user/info
+
+# appToken
+
+POST $apihost/activity/exerciseK/appAuth
+token=xkjlasjdflsj

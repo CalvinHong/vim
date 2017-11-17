@@ -12,7 +12,6 @@ set smartindent
 " 行号设置
 set number " 开启行号
 set numberwidth=5
-
 " 文件编码设置
 set fileencodings=utf-8,bg18030,gbk,big5
 set splitbelow
@@ -22,10 +21,12 @@ set tabstop=2
 set shiftwidth=2
 set shiftround
 set expandtab
-
+" 扩展matchpairs
+set matchpairs+=<:>
+" set showmatch
+" set matchtime=3
 " 显示tab空格
 set list listchars=tab:»·,trail:·
-
 " 开启文件类型检查
 filetype plugin indent on
 
@@ -77,14 +78,25 @@ Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 "目录树git差异标示
 Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" 函数导航
+function! BuildTagbar(info)
+  if a:info.status == 'installed' || a:info.force
+    !npm install -g jsctags
+  endif
+endfunction
+Plug 'majutsushi/tagbar', {'do': function('BuildTagbar')}
+
 "git差异提示
 Plug 'tpope/vim-fugitive'
 "行号旁边git差异显示
 Plug 'mhinz/vim-signify'
 " 自动闭合
-Plug 'jiangmiao/auto-pairs'
+" 快速替换包裹字符
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 " 快速注释
-Plug 'scrooloose/nerdcommenter'
+Plug 'tomtom/tcomment_vim'
 " 文件搜索
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -101,17 +113,10 @@ Plug 'moll/vim-bbye'
 " 多光标操作
 Plug 'terryma/vim-multiple-cursors'
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
 "中文切换问题
-Plug 'CodeFalling/fcitx-vim-osx'
 
-" 函数导航
-function! BuildTagbar(info)
-  if a:info.status == 'installed' || a:info.force
-    !npm install -g jsctags
-  endif
-endfunction
-Plug 'majutsushi/tagbar', {'do': function('BuildTagbar')}
+" markdown 语法
+Plug 'plasticboy/vim-markdown'
 
 function! BuildInstantMarkdown(info)
   if a:info.status == 'installed' || a:info.force
@@ -121,15 +126,17 @@ endfunction
 Plug 'suan/vim-instant-markdown', {'do': function('BuildInstantMarkdown')}
 " 语法检查
 Plug 'w0rp/ale'
-" 自动格式化
-Plug 'docunext/closetag.vim'
-Plug 'terryma/vim-expand-region'
 
 " web dev
 Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'posva/vim-vue'
+
+
+"rest console
+Plug 'aquach/vim-http-client'
+
 call plug#end()
 filetype plugin indent on " 必须
 " ========== 华丽分割线 ================
@@ -151,11 +158,17 @@ nmap <F8> <Plug>(ale_fix)
 nnoremap <Leader>sf :FZF<CR>
 nnoremap <Leader>sc :CtrlSF<Space>
 nnoremap <Leader>st :CtrlSFToggle<CR>
+" 文件历史
+nnoremap <Leader>sh :History<CR>
+"剪切板历史 cilpboard history
+nnoremap <Leader>ch :reg<CR>
 "选择搜索结果
 vmap     <Leader>sc <Plug>CtrlSFVwordPath
 " 选中搜索 - 结果列表
 vmap     <Leader>sl <Plug>CtrlSFQuickfixVwordPath
-
+" 缩进完自动又选中
+vnoremap < <gv
+vnoremap > >gv
 " 映射切换buffer的键位
 " 上一个buffer
 nnoremap <leader>bp :bp<CR> 
@@ -182,11 +195,11 @@ nnoremap <leader>tr :TernRename<cr>
 " location 列表显示全部引用行
 nnoremap <leader>tl :TernRefs<cr>
 "快速选择（）里面内容快捷键
-map K <Plug>(expand_region_expand)
-map J <Plug>(expand_region_shrink)
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 nnoremap <C-c> :call multiple_cursors#quit()<CR>
+
+nnoremap <leader>rr :HTTPClientDoRequest<CR>
 " ========== pluginConfig 插件相关的配置 ============
 
 " ========================
@@ -289,3 +302,22 @@ let g:ycm_complete_in_comments = 1
 let g:tern_show_argument_hints = 'on_hold'
 " 补全时显示函数类型定义
 let g:tern_show_signature_in_pum = 1
+"=========================
+" http_client 配置 
+"=========================
+" 关闭json编码
+let g:http_client_json_escape_utf = 0
+" 关闭窗口自动对焦
+"let g:http_client_focus_output_window=0
+"let g:http_client_result_vsplit = 0
+
+"=========================
+" nerdcommenter 配置 
+"=========================
+" let g:NERDSpaceDelims = 1
+" let g:NERDDefaultAlign = 'left'
+" let g:NERDCustomDelimiters = {
+      " \ 'javascript': { 'left': '//', 'leftAlt': '/**', 'rightAlt': '*/' },
+      " \ 'less': { 'left': '/**', 'right': '*/' },
+      " \ 'sass': { 'left': '/**', 'right': '*/' }
+" \ }
