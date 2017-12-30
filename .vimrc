@@ -62,7 +62,7 @@ call plug#begin('~/.vim/plugged')
 " YCC
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
-    !./install.sh
+    !python install.py --all
   endif
 endfunction
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
