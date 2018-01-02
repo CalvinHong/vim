@@ -44,5 +44,5 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 ...
 
 ### 开发辅助
-- [x] vim-http-client(有它还用postman？)
+- [x] vim-http-client
 
