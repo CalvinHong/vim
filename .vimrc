@@ -280,7 +280,9 @@ let g:ctrlsf_default_view_mode = 'compact'
 "=========================
 " tagbar 配置 
 "=========================
-let g:tagbar_ctags_bin='/usr/local/bin/ctags'
+" mac
+"let g:tagbar_ctags_bin='/usr/local/bin/ctags'
+let g:tagbar_ctags_bin='/usr/bin/ctags'
 "let g:tagbar_left = 1
 let g:tagbar_width = 50 
 let g:tagbar_autofocus=1
