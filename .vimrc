@@ -38,11 +38,11 @@ filetype plugin indent on
 " 显示光标
 set ruler
 " 光标高亮
-"au WinLeave * set nocursorline nocursorcolumn
-"au WinEnter * set cursorline cursorcolumn
+au WinLeave * set nocursorline nocursorcolumn
+au WinEnter * set cursorline cursorcolumn
 set cursorline cursorcolumn
-"hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-"hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 " 开启语法检查
 syntax enable
 
@@ -63,7 +63,7 @@ call plug#begin('~/.vim/plugged')
 " YCC
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
-    !python install.py --all
+    !./install.sh
   endif
 endfunction
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
