@@ -1,5 +1,5 @@
 #!/bin/sh
-ln .vimrc ~/.vimrc
+ln  -s ~/.vim/.vimrc ~/.vimrc
 if hash brew 2>/dev/null; then
   #安装cmake
   if ! hash make 2> /dev/null; then
