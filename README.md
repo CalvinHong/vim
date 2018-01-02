@@ -14,12 +14,12 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 具体不一一列举，具体看.vimrc
 
 ### 基础功能
-- [x] 目录树nerdtree(标配)
-- [x] airline（标配）
+- [x] 目录树nerdtree
+- [x] airline
 - [x] tagbar
 - [x] vim-bbye
 - [x] vim-surround
-- [x] vim-easymotion 光速移动（最喜欢）
+- [x] vim-easymotion （最喜欢）
 
 ...
 
