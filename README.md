@@ -1,4 +1,4 @@
-# vim配置备份
+# 基于vim的WEB IDE
 
 ## 包管理
 vim-plug
