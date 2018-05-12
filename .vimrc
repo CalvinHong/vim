@@ -86,6 +86,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 function! BuildTagbar(info)
   if a:info.status == 'installed' || a:info.force
     !npm install -g jsctags
+    !npm install -g git+https://github.com/Perlence/tstags.git
   endif
 endfunction
 Plug 'majutsushi/tagbar', {'do': function('BuildTagbar')}
@@ -117,6 +118,7 @@ Plug 'moll/vim-bbye'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'godlygeek/tabular'
 "中文切换问题
+Plug 'heavenshell/vim-jsdoc'
 
 " markdown 语法
 Plug 'plasticboy/vim-markdown'
@@ -135,7 +137,7 @@ Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'posva/vim-vue'
-
+Plug 'leafgarland/typescript-vim'
 
 "rest console
 Plug 'aquach/vim-http-client'
@@ -203,6 +205,7 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 nnoremap <C-c> :call multiple_cursors#quit()<CR>
 
 nnoremap <leader>rr :HTTPClientDoRequest<CR>
+nnoremap <leader>gd :JsDoc<CR>
 " ========== pluginConfig 插件相关的配置 ============
 
 " ========================
@@ -270,6 +273,7 @@ let g:airline#extensions#ale#enabled = 1
 let g:jsx_ext_required = 0
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
+\   'typescript': ['eslint']
 \}
 let g:ale_linters = {'css': ['stylelint']}
 "=========================
@@ -281,13 +285,31 @@ let g:ctrlsf_default_view_mode = 'compact'
 " tagbar 配置 
 "=========================
 " mac
-"let g:tagbar_ctags_bin='/usr/local/bin/ctags'
-let g:tagbar_ctags_bin='/usr/bin/ctags'
+let g:tagbar_ctags_bin='/usr/local/bin/ctags'
+" let g:tagbar_ctags_bin='/usr/bin/ctags'
 "let g:tagbar_left = 1
 let g:tagbar_width = 50 
 let g:tagbar_autofocus=1
 let g:tagbar_type_javascript = {
 \ 'ctagsbin' : 'jsctags'
+\ }
+let g:tagbar_type_typescript = {
+  \ 'ctagsbin' : 'tstags',
+  \ 'ctagsargs' : '-f-',
+  \ 'kinds': [
+    \ 'e:enums:0:1',
+    \ 'f:function:0:1',
+    \ 't:typealias:0:1',
+    \ 'M:Module:0:1',
+    \ 'I:import:0:1',
+    \ 'i:interface:0:1',
+    \ 'C:class:0:1',
+    \ 'm:method:0:1',
+    \ 'p:property:0:1',
+    \ 'v:variable:0:1',
+    \ 'c:const:0:1',
+  \ ],
+  \ 'sort' : 0
 \ }
 "=========================
 " muti_cursor 配置 
@@ -326,3 +348,7 @@ let g:http_client_json_escape_utf = 0
       " \ 'less': { 'left': '/**', 'right': '*/' },
       " \ 'sass': { 'left': '/**', 'right': '*/' }
 " \ }
+"=========================
+" jsdoc 配置 
+"=========================
+let g:jsdoc_enable_es6=1
