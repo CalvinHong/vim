@@ -117,6 +117,7 @@ Plug 'moll/vim-bbye'
 " 多光标操作
 Plug 'terryma/vim-multiple-cursors'
 Plug 'godlygeek/tabular'
+Plug 'vimlab/split-term.vim'
 "中文切换问题
 Plug 'heavenshell/vim-jsdoc'
 
@@ -278,6 +279,8 @@ let g:ale_fixers = {
 \}
 " let g:ale_linters = {'css': ['stylelint']}
 let g:ale_fix_on_save = 1
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
 "=========================
 " ctrlsf 配置 
 "=========================
