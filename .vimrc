@@ -32,6 +32,11 @@ set list listchars=tab:»·,trail:·
 " 开启文件类型检查
 filetype plugin indent on
 
+"使用语法高亮定义代码折叠
+set foldmethod=syntax
+"打开文件是默认不折叠代码
+set foldlevelstart=99
+
 "=========================
 " themeConfig 主题相关设置 
 "=========================
@@ -81,6 +86,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 "目录树git差异标示
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'chuckfairy/nerdtree-reveal'
 
 " 函数导航
 function! BuildTagbar(info)
@@ -117,7 +123,7 @@ Plug 'moll/vim-bbye'
 " 多光标操作
 Plug 'terryma/vim-multiple-cursors'
 Plug 'godlygeek/tabular'
-Plug 'vimlab/split-term.vim'
+" Plug 'vimlab/split-term.vim'
 "中文切换问题
 Plug 'heavenshell/vim-jsdoc'
 
@@ -138,11 +144,16 @@ Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'posva/vim-vue'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+
+" typescript相关插件
+Plug 'Quramy/tsuquyomi'
 Plug 'leafgarland/typescript-vim'
 
 "rest console
 Plug 'aquach/vim-http-client'
-
+" 快捷命令窗口
+Plug 'calvinhong/vim-terminal'
 call plug#end()
 filetype plugin indent on " 必须
 " ========== 华丽分割线 ================
@@ -152,10 +163,11 @@ filetype plugin indent on " 必须
 let mapleader = ";"
 "多光标选择
 let g:multi_cursor_quit_key='<C-c>'
-let g:multi_cursor_start_key='<leader>n'
+let g:multi_cursor_start_key='<leader>nn'
 imap <C-c> <Esc>
 " 关闭搜索高亮
-map <C-n> :nohl<cr>
+let hlstate=0
+nnoremap <Leader>nh :nohl<cr>
 " 折叠/展开nerdtree
 nmap <F5> :NERDTreeToggle<cr>
 nmap <F6> :TagbarToggle<CR>
@@ -186,6 +198,16 @@ nnoremap <leader>bd :Bdelete<CR>
 nnoremap <leader>bf :buffers<CR>:buffer<Space>
 " 之前打开的buffer
 nnoremap <leader>bb :b#<CR>
+nnoremap <Leader>1 :1b<CR>
+nnoremap <Leader>2 :2b<CR>
+nnoremap <Leader>3 :3b<CR>
+nnoremap <Leader>4 :4b<CR>
+nnoremap <Leader>5 :5b<CR>
+nnoremap <Leader>6 :6b<CR>
+nnoremap <Leader>7 :7b<CR>
+nnoremap <Leader>8 :8b<CR>
+nnoremap <Leader>9 :9b<CR>
+nnoremap <Leader>0 :10b<CR>
 " 跳转到浏览器
 nnoremap <leader>tb :TernDocBrowse<cr>
 " 显示变量定义
@@ -207,6 +229,9 @@ nnoremap <C-c> :call multiple_cursors#quit()<CR>
 
 nnoremap <leader>rr :HTTPClientDoRequest<CR>
 nnoremap <leader>gd :JsDoc<CR>
+
+map <silent> <F7> :TMTerminalToggle<cr>
+tmap <silent> <F7> <c-w>:TMTerminalToggle<cr>
 " ========== pluginConfig 插件相关的配置 ============
 
 " ========================
@@ -327,6 +352,10 @@ let g:multi_cursor_exit_from_insert_mode = 0
 let g:ycm_min_num_of_chars_for_completion = 3
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_complete_in_comments = 1
+if !exists('g:ycm_semantic_triggers')
+ let g:ycm_semantic_triggers = {}
+ endif
+ let g:ycm_semantic_triggers['typescript'] = ['.']
 "=========================
 " tern 配置 
 "=========================
