@@ -150,6 +150,9 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'Quramy/tsuquyomi'
 Plug 'leafgarland/typescript-vim'
 
+" go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
 "rest console
 Plug 'aquach/vim-http-client'
 " 快捷命令窗口
@@ -168,10 +171,10 @@ imap <C-c> <Esc>
 " 关闭搜索高亮
 let hlstate=0
 nnoremap <Leader>nh :nohl<cr>
+nmap <F4> <Plug>(ale_fix)
 " 折叠/展开nerdtree
 nmap <F5> :NERDTreeToggle<cr>
 nmap <F6> :TagbarToggle<CR>
-nmap <F8> <Plug>(ale_fix)
 "搜索文件
 nnoremap <Leader>sf :FZF<CR>
 nnoremap <Leader>sc :CtrlSF<Space>
@@ -232,6 +235,8 @@ nnoremap <leader>gd :JsDoc<CR>
 
 map <silent> <F7> :TMTerminalToggle<cr>
 tmap <silent> <F7> <c-w>:TMTerminalToggle<cr>
+map <silent> <F8> :TMTerminalOpenNew<cr>
+tmap <silent> <F8> <c-w>:TMTerminalOpenNew<cr>
 " ========== pluginConfig 插件相关的配置 ============
 
 " ========================
